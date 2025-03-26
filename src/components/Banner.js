@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import headerImg from "../assets/img/header-img.svg";
+import headerImg from "../assets/img/header-img.svg"; // Replace with your header image path
+import myImage from "../assets/img/profile.jpg"; // Add your image path here
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
@@ -11,8 +12,8 @@ export const Banner = () => {
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
-  const toRotate = [ "Web Developer", "Web Designer", "UI/UX Designer" ];
-  const period = 2000;
+  const toRotate = ["Web Developer", "Web Designer", "UI/UX Designer"];
+  const period = 1000;
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -20,7 +21,7 @@ export const Banner = () => {
     }, delta);
 
     return () => { clearInterval(ticker) };
-  }, [text])
+  }, [text]);
 
   const tick = () => {
     let i = loopNum % toRotate.length;
@@ -45,7 +46,7 @@ export const Banner = () => {
     } else {
       setIndex(prevIndex => prevIndex + 1);
     }
-  }
+  };
 
   return (
     <section className="banner" id="home">
@@ -54,29 +55,33 @@ export const Banner = () => {
           <Col xs={12} md={6} xl={7}>
             <TrackVisibility>
               {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-              <span className="tagline">Welcome to my Portfolio</span>
-              <h1>{`Hi! I'm Wakisa! `} 
-                <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'>
-                  <span className="wrap">{text}</span>
-                </span>
-              </h1>
-              <p>I am Wakisa Birhanu, a passionate and dedicated software engineer currently in my final year at Wolkite University. My expertise includes building responsive, user-friendly web applications with a focus on delivering high-quality designs and seamless user experiences.</p>
-              <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
-            </div>
-            }
+                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                  <div className="my-image-container">
+                    <img src={myImage} alt="My Image" className="my-image" />
+                    {/* Tagline positioned below the image */}
+                    <span className="tagline">Waaqkiisaa Birhaanuu</span>
+                  </div>
+                  <h1>{`Hi! I'm Wakisa! `}
+                    <span className="txt-rotate" dataperiod="1000" data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'>
+                      <span className="wrap">{text}</span>
+                    </span>
+                  </h1>
+                  <p>I am Wakisa Birhanu, a passionate and dedicated software engineer currently in my final year at Wolkite University. My expertise includes building responsive, user-friendly web applications with a focus on delivering high-quality designs and seamless user experiences.</p>
+                  <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
+                </div>
+              }
             </TrackVisibility>
           </Col>
           <Col xs={12} md={6} xl={5}>
             <TrackVisibility>
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                  <img src={headerImg} alt="Header Img"/>
+                  <img src={headerImg} alt="Header Img" />
                 </div>}
             </TrackVisibility>
           </Col>
         </Row>
       </Container>
     </section>
-  )
-}
+  );
+};
